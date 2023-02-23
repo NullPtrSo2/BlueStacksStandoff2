@@ -1,0 +1,10 @@
+C:\Users\CostGem\source\repos\StandoffBlueStacks\bin\Debug\StandoffBlueStacks.exe.config
+C:\Users\CostGem\source\repos\StandoffBlueStacks\bin\Debug\StandoffBlueStacks.exe
+C:\Users\CostGem\source\repos\StandoffBlueStacks\bin\Debug\StandoffBlueStacks.pdb
+C:\Users\CostGem\source\repos\StandoffBlueStacks\obj\Debug\StandoffBlueStacks.csproj.AssemblyReference.cache
+C:\Users\CostGem\source\repos\StandoffBlueStacks\obj\Debug\StandoffBlueStacks.Form1.resources
+C:\Users\CostGem\source\repos\StandoffBlueStacks\obj\Debug\StandoffBlueStacks.Properties.Resources.resources
+C:\Users\CostGem\source\repos\StandoffBlueStacks\obj\Debug\StandoffBlueStacks.csproj.GenerateResource.cache
+C:\Users\CostGem\source\repos\StandoffBlueStacks\obj\Debug\StandoffBlueStacks.csproj.CoreCompileInputs.cache
+C:\Users\CostGem\source\repos\StandoffBlueStacks\obj\Debug\StandoffBlueStacks.exe
+C:\Users\CostGem\source\repos\StandoffBlueStacks\obj\Debug\StandoffBlueStacks.pdb
