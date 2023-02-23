@@ -39,7 +39,9 @@ namespace StandoffBlueStacks
             this.osData = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.setBlueStacksCustomName = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
+            this.gpuData = new System.Windows.Forms.Label();
+            this.upgradeGpuDruverButton = new System.Windows.Forms.Button();
+            this.setNvidiaProfile = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.gpu_tab.SuspendLayout();
             this.system_tab.SuspendLayout();
@@ -68,7 +70,9 @@ namespace StandoffBlueStacks
             // gpu_tab
             // 
             this.gpu_tab.BackColor = System.Drawing.Color.DimGray;
-            this.gpu_tab.Controls.Add(this.label2);
+            this.gpu_tab.Controls.Add(this.setNvidiaProfile);
+            this.gpu_tab.Controls.Add(this.upgradeGpuDruverButton);
+            this.gpu_tab.Controls.Add(this.gpuData);
             this.gpu_tab.Location = new System.Drawing.Point(4, 25);
             this.gpu_tab.Name = "gpu_tab";
             this.gpu_tab.Size = new System.Drawing.Size(1072, 571);
@@ -122,7 +126,7 @@ namespace StandoffBlueStacks
             this.osData.AutoSize = true;
             this.osData.Font = new System.Drawing.Font("JetBrains Mono", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.osData.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.osData.Location = new System.Drawing.Point(30, 17);
+            this.osData.Location = new System.Drawing.Point(3, 10);
             this.osData.Name = "osData";
             this.osData.Size = new System.Drawing.Size(259, 20);
             this.osData.TabIndex = 0;
@@ -150,16 +154,38 @@ namespace StandoffBlueStacks
             this.setBlueStacksCustomName.UseVisualStyleBackColor = true;
             this.setBlueStacksCustomName.Click += new System.EventHandler(this.setBlueStacksCustomName_Click);
             // 
-            // label2
+            // gpuData
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("JetBrains Mono", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label2.Location = new System.Drawing.Point(13, 13);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(129, 20);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Видеокарта: ";
+            this.gpuData.AutoSize = true;
+            this.gpuData.Font = new System.Drawing.Font("JetBrains Mono", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.gpuData.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.gpuData.Location = new System.Drawing.Point(3, 9);
+            this.gpuData.Name = "gpuData";
+            this.gpuData.Size = new System.Drawing.Size(129, 20);
+            this.gpuData.TabIndex = 3;
+            this.gpuData.Text = "Видеокарта: ";
+            // 
+            // upgradeGpuDruverButton
+            // 
+            this.upgradeGpuDruverButton.Font = new System.Drawing.Font("JetBrains Mono", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.upgradeGpuDruverButton.Location = new System.Drawing.Point(13, 465);
+            this.upgradeGpuDruverButton.Name = "upgradeGpuDruverButton";
+            this.upgradeGpuDruverButton.Size = new System.Drawing.Size(177, 59);
+            this.upgradeGpuDruverButton.TabIndex = 4;
+            this.upgradeGpuDruverButton.Text = "Обновить драйвера";
+            this.upgradeGpuDruverButton.UseVisualStyleBackColor = true;
+            this.upgradeGpuDruverButton.Click += new System.EventHandler(this.upgradeGpuDruverButton_Click);
+            // 
+            // setNvidiaProfile
+            // 
+            this.setNvidiaProfile.Font = new System.Drawing.Font("JetBrains Mono", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.setNvidiaProfile.Location = new System.Drawing.Point(207, 465);
+            this.setNvidiaProfile.Name = "setNvidiaProfile";
+            this.setNvidiaProfile.Size = new System.Drawing.Size(177, 59);
+            this.setNvidiaProfile.TabIndex = 5;
+            this.setNvidiaProfile.Text = "Применить профиль NVIDIA";
+            this.setNvidiaProfile.UseVisualStyleBackColor = true;
+            this.setNvidiaProfile.Click += new System.EventHandler(this.setNvidiaProfile_Click);
             // 
             // Form1
             // 
@@ -197,7 +223,9 @@ namespace StandoffBlueStacks
         private System.Windows.Forms.Label osData;
         private System.Windows.Forms.Button setBlueStacksCustomName;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label gpuData;
+        private System.Windows.Forms.Button setNvidiaProfile;
+        private System.Windows.Forms.Button upgradeGpuDruverButton;
     }
 }
 

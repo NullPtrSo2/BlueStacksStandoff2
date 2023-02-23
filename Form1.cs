@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Management;
@@ -15,8 +16,10 @@ namespace StandoffBlueStacks
 {
     public partial class Form1 : Form
     {
+        string version = "", cpu = "", gpu = "", gpuDriverVersion = "", ram = "";
         public Form1()
         {
+            SetGpuInfo();
             InitializeComponent();
         }
 
@@ -30,15 +33,40 @@ namespace StandoffBlueStacks
 
         }
 
+        private void upgradeGpuDruverButton_Click(object sender, EventArgs e)
+        {
+            if (gpu.ToLower().Contains("amd") || gpu.ToLower().Contains("radeon") || gpu.ToLower().Contains("radeon rx"))
+            {
+                Process.Start("https://www.amd.com/en/support");
+            }
+            else if (gpu.ToLower().Contains("nvidia"))
+            {
+                Process.Start("https://www.nvidia.com/download/");
+            }
+            else if (gpu.ToLower().Contains("intel"))
+            {
+                Process.Start("https://www.intel.ru/content/www/ru/ru/download/18369/latest.html?");
+            }
+            else
+            {
+                MessageBox.Show("Извините, мы не смогли определить производителя вашей видеокарты :(");
+            }
+        }
+
+        private void setNvidiaProfile_Click(object sender, EventArgs e)
+        {
+            if (gpu.ToLower().Contains("nvidia"))
+            {
+                Process.Start(Environment.CurrentDirectory.ToString() + @"\install_profile.bat");
+            }
+            
+        }
+
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tabControl1.SelectedTab == system_tab)
             {
                 SetSystemInfo();
-            }
-            else if (tabControl1.SelectedTab == gpu_tab)
-            {
-
             }
         }
 
@@ -46,7 +74,6 @@ namespace StandoffBlueStacks
         {
             await Task.Run(() =>
             {
-                string version = "", cpu = "", gpu = "", gpuDriverVersion = "", ram = "";
                 using (ManagementObjectSearcher osInfo = new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem"))
                 {
                     foreach (ManagementObject osObject in osInfo.Get())
@@ -67,6 +94,24 @@ namespace StandoffBlueStacks
                     }
                 }
 
+                using (ManagementObjectSearcher ramInfo = new ManagementObjectSearcher("SELECT Capacity FROM Win32_PhysicalMemory"))
+                {
+                    foreach (ManagementObject ramObject in ramInfo.Get())
+                    {
+                        ram = (Convert.ToInt64(ramObject.Properties["Capacity"].Value) / 1024 / 1024 / 512).ToString();
+                    }
+                }
+
+                SetGpuInfo();
+
+                osData.Text = $"Характеристики вашего ПК:\nСистема: {version}\nПроцессор: {cpu}\nВидеокарта: {gpu}\nОперативная память: {ram} GB";
+            });
+        }
+
+        public async void SetGpuInfo()
+        {
+            await Task.Run(() =>
+            {
                 using (ManagementObjectSearcher gpuInfo = new ManagementObjectSearcher("SELECT * FROM Win32_VideoController"))
                 {
                     foreach (ManagementObject gpuObject in gpuInfo.Get())
@@ -76,32 +121,18 @@ namespace StandoffBlueStacks
                             gpu = gpuObject["Name"].ToString();
                             gpuDriverVersion = gpuObject["DriverVersion"].ToString();
                         }
-                        //Response.Write("DeviceID  -  " + gpuObject["DeviceID"] + "</br>");
-                        ///Response.Write("AdapterRAM  -  " + gpuObject["AdapterRAM"] + "</br>");
-                        //Response.Write("AdapterDACType  -  " + gpuObject["AdapterDACType"] + "</br>");
-                        //Response.Write("Monochrome  -  " + gpuObject["Monochrome"] + "</br>");
-                        //Response.Write("InstalledDisplayDrivers  -  " + gpuObject["InstalledDisplayDrivers"] + "</br>");
-                        //Response.Write("DriverVersion  -  " + gpuObject["DriverVersion"] + "</br>");
-                        //Response.Write("VideoProcessor  -  " + gpuObject["VideoProcessor"] + "</br>");
-                        //Response.Write("VideoArchitecture  -  " + gpuObject["VideoArchitecture"] + "</br>");
-                        //Response.Write("VideoMemoryType  -  " + gpuObject["VideoMemoryType"] + "</br>");
                     }
                 }
-
-                using (ManagementObjectSearcher ramInfo = new ManagementObjectSearcher("SELECT Capacity FROM Win32_PhysicalMemory"))
+                if (gpu.ToLower().Contains("nvidia"))
                 {
-                    foreach (ManagementObject ramObject in ramInfo.Get())
-                    {
-                        ram = (Convert.ToInt64(ramObject.Properties["Capacity"].Value) / 1024 / 1024 / 512).ToString();
-                    }
+                    setNvidiaProfile.Visible = true;
                 }
-                osData.Text = $"Характеристики вашего ПК:\nСистема: {version}\nПроцессор: {cpu}\nВидеокарта: {gpu}\nОперативная память: {ram} GB";
+                else
+                {
+                    setNvidiaProfile.Visible = false;
+                }
+                gpuData.Text = $"Видеокарта: {gpu}\nВерсия драйвера: {gpuDriverVersion}";
             });
-        }
-
-        public async void SetGpuInfo()
-        {
-
         }
 
         private void setBlueStacksCustomName_Click(object sender, EventArgs e)
